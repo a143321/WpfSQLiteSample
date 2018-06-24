@@ -1,0 +1,48 @@
+﻿<Window x:Class="WPFSample4.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainView" Height="600" Width="600">
+
+    <DockPanel Dock="Top">
+        <GroupBox Header="本のデータを入力してください" Height="100" DockPanel.Dock="Top">
+            <StackPanel>
+                <DockPanel>
+                    <TextBlock>タイトル:</TextBlock>
+                    <TextBox Width="Auto" Text="{Binding Book.Title, UpdateSourceTrigger=PropertyChanged}"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock>著者:</TextBlock>
+                    <TextBox Width="Auto" Text="{Binding Book.Author, UpdateSourceTrigger=PropertyChanged}"/>
+                </DockPanel>
+                <DockPanel>
+                    <TextBlock>価格:</TextBlock>
+                    <TextBox Width="Auto" Text="{Binding Book.Price, UpdateSourceTrigger=PropertyChanged}"/>
+                </DockPanel>
+            </StackPanel>
+        </GroupBox>
+        <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
+            <Button Content="データ追加"
+                    Command ="{Binding AddCommand, Mode=OneWay}"></Button>
+            <Button Content="データ削除"
+                    Command ="{Binding DelComamnd}"
+                    CommandParameter="{Binding ElementName=nameBookList, Path=SelectedItem}"
+                    IsEnabled="{Binding ElementName=nameBookList, Path=SelectedItems.Count}"/>
+            <Button Content="データ全削除"
+                    Command ="{Binding DelAllComamnd, Mode=OneWay}"
+                    IsEnabled="{Binding ElementName=nameBookList, Path=Items.Count}"/>
+        </StackPanel>
+        <DockPanel Width="AUto" Height="Auto" DockPanel.Dock="Top">
+            <DataGrid Name="nameBookList" ItemsSource="{Binding CollectionList}" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
+                    <DataGridTextColumn Header="Author" Binding="{Binding Author}" />
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </DockPanel>
+</Window>
