@@ -69,8 +69,6 @@ namespace WPFSample4.Models
                     command.CommandText = sb.ToString();
                     command.ExecuteNonQuery();
                 }
-                // 切断
-                connection.Close();
             }
         }
 
@@ -116,11 +114,6 @@ namespace WPFSample4.Models
                     Console.WriteLine(exception.Message);
                     throw;
                 }
-                finally
-                {
-                    // データベースの接続終了
-                    connection.Close();
-                }
             }
             return list;
         }
@@ -154,11 +147,6 @@ namespace WPFSample4.Models
                     Console.WriteLine(exception.Message);
                     throw;
                 }
-                finally
-                {
-                    // データベースの接続終了
-                    connection.Close();
-                }
             }
         }
 
@@ -186,11 +174,6 @@ namespace WPFSample4.Models
                     Console.WriteLine(exception.Message);
                     throw;
                 }
-                finally
-                {
-                    // データベースの接続終了
-                    connection.Close();
-                }
             }
         }
 
@@ -217,11 +200,6 @@ namespace WPFSample4.Models
                 {
                     Console.WriteLine(exception.Message);
                     throw;
-                }
-                finally
-                {
-                    // データベースの接続終了
-                    connection.Close();
                 }
             }
         }
@@ -260,11 +238,6 @@ namespace WPFSample4.Models
                 catch (Exception exception)
                 {
                     Console.WriteLine(exception.Message);
-                }
-                finally
-                {
-                    // データベースの接続終了
-                    connection.Close();
                 }
             }
 
