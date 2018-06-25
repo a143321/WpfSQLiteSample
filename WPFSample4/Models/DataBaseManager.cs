@@ -61,12 +61,7 @@ namespace WPFSample4.Models
                 // コマンドの実行
                 using (var command = connection.CreateCommand())
                 {
-                    // テーブルが存在しなければ作成する
-                    // 種別マスタ
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("CREATE TABLE T_BOOKLIST(ID Number PRIMARY KEY, Title String, Author String, Price Number)");
-
-                    command.CommandText = sb.ToString();
+                    command.CommandText = "CREATE TABLE T_BOOKLIST(ID int PRIMARY KEY, Title string, Author string, Price int)";
                     command.ExecuteNonQuery();
                 }
             }
@@ -164,10 +159,12 @@ namespace WPFSample4.Models
                     connection.Open();
 
                     // SQLの設定
-                    command.CommandText = String.Format(@"DELETE FROM T_BOOKLIST WHERE ID={0}", someBook.ID);
+                    command.CommandText = @"DELETE FROM T_BOOKLIST WHERE ID=@ID";
+
+                    command.Parameters.Add(new SQLiteParameter("@ID", someBook.ID));
 
                     // SQLの実行
-                    command.ExecuteReader();
+                    command.ExecuteNonQuery();
                 }
                 catch (Exception exception)
                 {
@@ -194,7 +191,7 @@ namespace WPFSample4.Models
                     command.CommandText = "DELETE FROM T_BOOKLIST";
 
                     // SQLの実行
-                    command.ExecuteReader();
+                    command.ExecuteNonQuery();
                 }
                 catch (Exception exception)
                 {
