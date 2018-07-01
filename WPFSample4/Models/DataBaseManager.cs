@@ -135,6 +135,10 @@ namespace WPFSample4.Models
                     command.Parameters.Add(new SQLiteParameter("@Title", someBook.Title));
                     command.Parameters.Add(new SQLiteParameter("@Author", someBook.Author));
                     command.Parameters.Add(new SQLiteParameter("@Price", someBook.Price));
+
+                    //パラメータをセット
+                    command.Prepare();
+
                     command.ExecuteNonQuery();
                 }
                 catch (Exception exception)
@@ -162,6 +166,9 @@ namespace WPFSample4.Models
                     command.CommandText = @"DELETE FROM T_BOOKLIST WHERE ID=@ID";
 
                     command.Parameters.Add(new SQLiteParameter("@ID", someBook.ID));
+
+                    //パラメータをセット
+                    command.Prepare();
 
                     // SQLの実行
                     command.ExecuteNonQuery();
